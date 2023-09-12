@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <h2>ヘアカタログ一覧</h2>
+
+      <%= button_to "+", new_admin_hair_catalog_path, method: :get %>
+      <div class="text-center">< link_to "+", new_admin_item_path(@item), class:"btn btn-outline-warning" %></div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th class='table-active'>髪の長さ</th>
+            </tr>
+          </thead>
+            <% @hair_catalogs.each do |hair_catalog| %>
+              <tr>
+                <td><%= hair_catalog.id %></td>
+                <td><%= link_to hair_catalog.name, admin_hair_catalogs_path(hair_catalog.id), class:"text-dark"%></td>
+                <td><%= hair_catalog.hair_long.name %></td>
+              </tr>
+            <% end %>
+        </table>
+  </div>
+</div>

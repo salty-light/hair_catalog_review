@@ -1,0 +1,40 @@
+<div class="container">
+  <% if @hair_catalog.errors.any? %>
+  <%= @hair_catalog.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @itemhair_catalog.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  <% end %>
+  <h2>ヘアカタログ新規登録</h2>
+   <div class="row">
+     <div class="col-sm-2" ></div>
+       <div class="col-sm-8" >
+         <%= form_with model: @hair_catalog, url: hair_catalogs_path , method: :post do |f| %>
+         <table>
+      　    <tbody>
+             <tr>
+        　　     <td>髪型画像</td>
+        　　     <td><%= f.file_field :image, accept: "image/*" %></td>
+        　    </tr>
+        　    <tr>
+        　　     <td>名前</td>
+        　　     <td><%= f.text_field :name, placeholder: "名前" %></td>
+        　    </tr>
+        　    <tr>
+        　　     <td髪型品説明</td>
+        　　     <td><%= f.text_area :explamatory_text, placeholder: "ここに説明文を記述します" %></td>
+        　    </tr>
+        　    <tr>
+        　    　<td>髪型の長さ</td>
+        　　     <td><%= f.collection_select :hair_long_id, HairLong.all, :id, :name, include_blank: "選択して下さい" %></td>
+        　    </tr>
+        　      <td><%= f.submit '新規登録', class:"btn btn-success" %></td>
+          <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-2" ></div>
+  </div>
+</div>

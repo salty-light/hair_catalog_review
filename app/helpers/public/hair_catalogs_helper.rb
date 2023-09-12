@@ -1,0 +1,2 @@
+module Public::HairCatalogsHelper
+end

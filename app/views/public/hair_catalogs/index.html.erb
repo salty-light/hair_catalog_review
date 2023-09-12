@@ -1,0 +1,50 @@
+<div class='container pt-5'>
+  <div class='row'>
+    <div class='col-lg'>
+<h1>ヘアカタログ一覧</h1></br>
+<div class "container " >
+  <div class="row m-2">  
+
+    <% @hair_catalogs.each do |hair_catalogs| %>
+    <div class="col-lg-3" > 
+    <div class="">
+     <div> <%= link_to image_tag(hair_catalogs.image, width: '200', height: '200'), hair_catalog_path(hair_catalog) %>  </div>
+      <div><h5> <%= hair_catalog.name %> </h5></div>
+      
+    </div>
+    </div>
+    <% end %>
+    <h3>レビュー新規登録</h3>
+   <div class="row">
+     <div class="col-sm-2" ></div>
+       <div class="col-sm-8" >
+         <%= form_with model: @hair_catalog, url: _path , method: :post do |f| %>
+         <table>
+      　    <tbody>
+             <tr>
+        　　     <td>髪型画像</td>
+        　　     <td><%= f.file_field :image, accept: "image/*" %></td>
+        　    </tr>
+        　    <tr>
+        　　     <td>名前</td>
+        　　     <td><%= f.text_field :name, placeholder: "名前" %></td>
+        　    </tr>
+        　    <tr>
+        　　     <td>レビュー</td>
+        　　     <td><%= f.text_field :name, placeholder: "名前" %></td>
+        　     </tr>
+        　      <td><%= f.submit '新規登録', class:"btn btn-success" %></td>
+                <% end %>
+            </tbody>
+          </table>
+    <h3>ヘアレビューフォーム</h3></br>
+    <%= form_with model: HairCatalog.new do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :explamatory_text %>
+<% end %>
+
+  </div>  
+</div>  
+</div>
+    </div>
+    </div>
