@@ -13,9 +13,9 @@ Rails.application.routes.draw do
       resources :review, only: [:index, :edit, :create, :update, :destroy]
 
 
-      get "customers/:id" => "customers#show"
-      patch "customers/:id" => "customers#update"
-      get "customers/:id/edit" => "customers#edit"
+      get "customers/:id" => "customers#show", as: :customer
+      patch "customers/:id" => "customers#update", as: :customer_update
+      get "customers/:id/edit" => "customers#edit", as: :customer_edit
       get "customers/confirm" => "customers#confirm"
       patch "customers/withdraw" => "customers#withdraw"
       resources :hair_catalogs, only: [:index, :show]

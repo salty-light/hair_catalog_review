@@ -1,4 +1,5 @@
 class Admin::HairLongsController < ApplicationController
+protect_from_forgery 
 def index
     @hair_long = HairLong.new
   @hair_longs = HairLong.all
