@@ -2,6 +2,8 @@
   <h2>会員情報編集</h2>
     <%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
     <div class="row">
+        　<div class="col-2 offset-md-1"><%= f.label "アイコン画像" %></div> 
+        　<div class="col-1"><%= f.file_field :image, accept: "image/*" %></div> 
           <div class="col-2 offset-md-1"><%= f.label "氏名" %></div>
           <div class="col-1"><%= f.text_field :last_name, :size => "10", placeholder: "令和" %></div>
           <div class="col-1"><%= f.text_field :first_name, :size => "10", placeholder: "道子" %></div>
@@ -26,4 +28,3 @@
     </div>
     <% end %>
  </div>
-

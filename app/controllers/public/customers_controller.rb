@@ -3,6 +3,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = current_customer
+    @reviews = Review.where(customer_id: @customer.id).order(created_at: :desc)
   end
 
   def edit
@@ -12,7 +13,7 @@ class Public::CustomersController < ApplicationController
   def update
     customer = current_customer
     customer.update(customer_params)
-    redirect_to current_customer_path
+    redirect_to current_customer
   end
 
 
@@ -30,6 +31,6 @@ class Public::CustomersController < ApplicationController
 private
 
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nick_name, :email)
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nick_name, :email, :image)
   end
 end

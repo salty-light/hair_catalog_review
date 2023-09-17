@@ -1,0 +1,50 @@
+<%#= form_with model: @hair_catalog, url: hair_catalogs_path do |f| %>
+  <body>
+  <main>
+   <div class="container px-5 px-sm-3">
+   <div class="row">
+   <div class="col-md-3"> </br>
+  <%#= f.hidden_field :hair_catalog_id, value: @hair_catalog.id %>
+  
+  <%= image_tag @hair_catalog.image, size: "300x300" %></div>
+  
+  <div class="col-md-8 offset-md-1">
+   </br>
+    </br>
+     <h1><%= @hair_catalog.name %> </h1>
+      <h5> <%= @hair_catalog.explamatory_text %></h5>
+       
+      <%# end %>
+     </div>
+   </div>
+    <h5>レビュー新規登録</h5>
+   <div class="row">
+     <div class="col-sm-2" ></div>
+       <div class="col-sm-8" >
+         <%= form_with model: @review, url: hair_catalog_reviews_path(@hair_catalog) , method: :post do |f| %>
+         <table>
+          <tbody>
+           <tr>
+            <td>髪型画像*自分の画像を貼り付けてください！</td>  <td><%= f.file_field :image, accept: "image/*" %></td></tr>
+            
+            <tr>
+             
+              <td>レビュー</td>
+              <td><%= f.text_area :body, placeholder: "感想をいれてください" %></td>
+              </tr>
+              <td><%= f.submit '新規登録', class:"btn btn-success" %></td>
+              <% end %>
+            </tbody>
+          </table>
+   </div>
+   
+   
+   
+   <% @hair_catalog.reviews.each do |review|%>
+    <% if review.image.attached? %>
+    <%= image_tag review.image, size: "300x300" %>
+  <% else %>
+  <% end %>
+     <%= review.customer.nick_name %>
+     <%= review.body %>
+   <%end%>

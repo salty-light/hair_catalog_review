@@ -2,7 +2,7 @@
   <% if @hair_catalog.errors.any? %>
   <%= @hair_catalog.errors.count %>件のエラーが発生しました
   <ul>
-    <% @itemhair_catalog.errors.full_messages.each do |message| %>
+    <% @hair_catalog.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
@@ -11,7 +11,7 @@
    <div class="row">
      <div class="col-sm-2" ></div>
        <div class="col-sm-8" >
-         <%= form_with model: @hair_catalog, url: hair_catalogs_path , method: :post do |f| %>
+         <%= form_with model: @hair_catalog, url: admin_hair_catalogs_path, method: :post do |f| %>
          <table>
       　    <tbody>
              <tr>

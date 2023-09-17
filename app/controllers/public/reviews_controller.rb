@@ -9,10 +9,13 @@ def index
   end
 
   def create
-    @review = Review.new(item_params)
+    @review = Review.new(review_params)
+    @review.customer_id=current_customer.id
+    @hair_catalog = HairCatalog.find(params[:hair_catalog_id])
+    @review.hair_catalog_id = @hair_catalog.id
     if @review.save
       flash[:success] = "レビューしました"
-      redirect_to review_index_path(@review)
+      redirect_to hair_catalog_path(@hair_catalog)
     else
       render :new
     end
@@ -39,7 +42,7 @@ def index
   private
 
   def review_params
-    params.require(:review).permit(:hair_long_id, :name, :explamatory_text,  :image)
+    params.require(:review).permit(:body,  :image ,:score)
   end
 
 end

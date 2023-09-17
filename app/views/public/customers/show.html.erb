@@ -1,27 +1,58 @@
 <div class='container pt-5'>
-    <div class='row'>
-        <div class='col-md-6'>
-          <h2>マイページ</h2>
-            <h5><strong>登録情報　　</strong><%= link_to "編集する", customer_edit_path, class:"btn btn-success" %></h5>
-            <table class='table table-bordered mt-3'>
-　　　　　　　　#髪型の画像プロフィール
-              <tr>
-                <td class='table-active'>氏名</td>
-                <td><%= @customer.last_name %> <%= @customer.first_name %></td>
-              </tr>
-              <tr>
-                <td class='table-active'>カナ</td>
-                <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
-              </tr>
-              <tr>
-               <tr>
-                <td class='table-active'>ニックネーム</td>
-                <td><%= @customer.nick_name %></td>
-              </tr> 
-              <tr>
-                <td class='table-active'>メールアドレス</td>
-                <td><%= @customer.email %></td>
-              </tr>
-          </div>
+  <div class='row'>
+    <div class='col-md-6 mx-auto'>
+      <h2>マイページ</h2>
+      <h5><strong>登録情報　　</strong><%= link_to "編集する", customer_edit_path, class:"btn btn-success" %></h5>
+      <table class='table table-bordered mt-3'>
+        <tr>
+          <td class="table-active">氏名</td>
+          <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+        </tr>
+        <tr>
+          <td class="table-active">カナ</td>
+          <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+        </tr>
+        <tr>
+          <td class="table-active">ニックネーム</td>
+          <td><%= @customer.nick_name %></td>
+        </tr>
+        <tr>
+          <td class="table-active">メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <td class="table-active">画像</td>
+          <td>
+            <% if @customer.image.attached? %>
+              <%= image_tag(@customer.image, width: '200', height: '200') %>
+            <% else %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+
+      <h2>マイレビュー</h2>
+      <table class="table">
+        <% @reviews.each do |review| %>
+          <tr>
+            <td>
+              <%= review.hair_catalog.name %>
+            </td>
+            <td>
+              <% if review.image.attached? %>
+                <%= image_tag review.image, size: "100x100" %>
+              <% end %>
+            </td>
+            <td>
+              <%= review.body %>
+            </td>
+            <td>
+              ここにレビューの削除や編集ボタンを配置
+            </td>
+          </tr>
+        <% end %>
+      </table>
     </div>
+  </div>
 </div>
+<div id="post_raty"></div>

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       scope module: :public do
       get 'top' => 'homes#top'
       get "/about" => "homes#about", as: "about"
-      resources :review, only: [:index, :edit, :create, :update, :destroy]
+     
 
 
       get "customers/:id" => "customers#show", as: :customer
@@ -18,7 +18,9 @@ Rails.application.routes.draw do
       get "customers/:id/edit" => "customers#edit", as: :customer_edit
       get "customers/confirm" => "customers#confirm"
       patch "customers/withdraw" => "customers#withdraw"
-      resources :hair_catalogs, only: [:index, :show]
+      resources :hair_catalogs, only: [:index, :show] do
+         resources :reviews, only: [:index, :edit, :create, :update, :destroy]
+      end
       get "reviews/:id"=> "reviews#update"
       delete "hair_catalogs/:hair_id/reviews/:id"=>  "reviews#destroy"
       get "hair_catalogs/:id/reviews/"=>"reviews#edit"
@@ -30,7 +32,8 @@ Rails.application.routes.draw do
 
       resources :customers, only: [:index, :show, :edit, :update]
       resources :hair_longs, only: [:index, :edit, :create, :update]
-      resources :hair_catalogs, only: [:index, :new, :show, :edit, :create, :update]
+      resources :hair_catalogs, only: [:index, :new, :show, :edit, :create, :update] 
+       
 
     end
 

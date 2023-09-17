@@ -1,8 +1,8 @@
 <div class="container">
-  <% if @item.errors.any? %>
-  <%= @item.errors.count %>件のエラーが発生しました
+  <% if @hair_catalog.errors.any? %>
+  <%= @hair_catalog.errors.count %>件のエラーが発生しました
   <ul>
-    <% @item.errors.full_messages.each do |message| %>
+    <% @hair_catalog.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
@@ -11,7 +11,7 @@
    <div class="row">
      <div class="col-sm-2" ></div>
      <div class="col-sm-8" >
-     <%= form_with model: @item, url: admin_item_path, method: :patch do |f| %>
+     <%= form_with model: @hair_catalog, url: admin_catalog_path, method: :patch do |f| %>
      <table>
   　    <tbody>
          <tr>
@@ -26,25 +26,7 @@
     　　     <td>商品説明</td>
     　　     <td><%= f.text_area :explamatory_text %></td>
     　    </tr>
-    　    <tr>
-    　    　<td>ジャンル</td>
-    　　     <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "選択して下さい" %></td>
-    　    </tr>
-    　    <tr>
-    　　     <td>税抜価格</td>
-    　　     <td><%= f.text_field :without_tax_price %>円</td>
-    　    </tr>
-    　    <tr>
-    　　     <td>販売ステータス</td>
-    　　     <td>
-    　　       <%= f.radio_button :is_sales_status, true %>
-               <%= f.label :is_sales_status, "販売中", {value: :true, style: "display: inline-block;"} %>
-             <%= f.radio_button :is_sales_status, false %>
-               <%= f.label :is_sales_status, "販売停止中", {value: :false, style: "display: inline-block;"} %>
-    　　     </td>
-    　    </tr>
            <td><%= f.submit '変更を保存', class:"btn btn-success" %></td>
-
      <% end %>
      </div>
      <div class="col-sm-2" ></div>
