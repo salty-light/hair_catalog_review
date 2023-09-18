@@ -5,19 +5,16 @@
    <div class="row">
    <div class="col-md-3"> </br>
   <%#= f.hidden_field :hair_catalog_id, value: @hair_catalog.id %>
-  
   <%= image_tag @hair_catalog.image, size: "300x300" %></div>
-  
   <div class="col-md-8 offset-md-1">
    </br>
     </br>
      <h1><%= @hair_catalog.name %> </h1>
       <h5> <%= @hair_catalog.explamatory_text %></h5>
-       
       <%# end %>
      </div>
    </div>
-    <h5>レビュー新規登録</h5>
+   <h3>レビュー新規登録</h3>
    <div class="row">
      <div class="col-sm-2" ></div>
        <div class="col-sm-8" >
@@ -25,26 +22,77 @@
          <table>
           <tbody>
            <tr>
-            <td>髪型画像*自分の画像を貼り付けてください！</td>  <td><%= f.file_field :image, accept: "image/*" %></td></tr>
-            
+            <td>髪型画像</td>  <td><%= f.file_field :image, accept: "image/*" %></td></tr>
             <tr>
-             
               <td>レビュー</td>
               <td><%= f.text_area :body, placeholder: "感想をいれてください" %></td>
+          <td><% if @review.id.nil? %>
+          <div class="form-group" id="score">
+      <%= f.label :score %>
+      <%= f.hidden_field :score, id: :review_score, class: 'form-control' %>
+      <div id="post_raty"></div>
+    </div>
+    <script>
+      $(document).on('turbolinks:load', function() {
+        let elem = document.querySelector('#post_raty');
+        if (elem == null) return;
+
+        elem.innerHTML = ""
+        let opt = {
+          starOn: "<%= asset_path('star-on.png') %>",
+          starOff: "<%= asset_path('star-off.png') %>",
+          starHalf: "<%= asset_path('star-half.png') %>",
+          scoreName: 'review[score]',
+        };
+        raty(elem, opt);
+      });
+    </script>
+  <% else %>
+    <div class="form-group">
+      <%= render "static_rate", review: review %>
+    </div>
+  <% end %>
+
+  </td>
               </tr>
               <td><%= f.submit '新規登録', class:"btn btn-success" %></td>
               <% end %>
             </tbody>
           </table>
+        </div>
    </div>
-   
-   
-   
-   <% @hair_catalog.reviews.each do |review|%>
-    <% if review.image.attached? %>
-    <%= image_tag review.image, size: "300x300" %>
-  <% else %>
-  <% end %>
-     <%= review.customer.nick_name %>
-     <%= review.body %>
-   <%end%>
+<div class="container px-5 px-sm-3">
+   <div class="row">
+   <div class="col-md-6 mx-auto text-center">
+    <table>
+     <tbody>
+       <% @hair_catalog.reviews.each do |review|%>
+        <% if review.image.attached? %>
+        <tr><td>髪型画像</td>
+        <td><%= image_tag review.image, size: "200x200" %></td></tr>
+         <% else %>
+        <% end %>
+       <h5>  <%= review.customer.nick_name %> </h5>
+       <h6>  <%= review.body %></h6>
+       <div id="score_<%= review.id %>"></div>
+<script>
+$(document).on('turbolinks:load', function() {
+  let elem = document.querySelector('#score_<%= review.id %>');
+  if (elem == null) return;
+  
+  elem.innerHTML = "";
+  let opt = {  
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: "<%= review.score %>",
+    readOnly: true,
+  };
+  raty(elem, opt);
+});
+</script>
+     <%end%>
+   </tbody>
+    </table>
+  </body>
+  </main>

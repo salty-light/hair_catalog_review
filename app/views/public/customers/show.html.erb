@@ -30,8 +30,7 @@
           </td>
         </tr>
       </table>
-
-      <h2>マイレビュー</h2>
+   　<h2>マイレビュー</h2>
       <table class="table">
         <% @reviews.each do |review| %>
           <tr>
@@ -40,14 +39,32 @@
             </td>
             <td>
               <% if review.image.attached? %>
-                <%= image_tag review.image, size: "100x100" %>
+                <%= image_tag review.image, size: "200x200" %>
               <% end %>
             </td>
             <td>
               <%= review.body %>
             </td>
             <td>
-              ここにレビューの削除や編集ボタンを配置
+               <div id="score_<%= review.id %>"></div>
+<script>
+$(document).on('turbolinks:load', function() {
+  let elem = document.querySelector('#score_<%= review.id %>');
+  if (elem == null) return;
+  
+  elem.innerHTML = "";
+  let opt = {  
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: "<%= review.score %>",
+    readOnly: true,
+  };
+  raty(elem, opt);
+});</script>
+            </td>
+            <td>
+              <%= link_to "削除",  hair_catalog_review_path(review.hair_catalog_id, review.id), method: :delete, data: { confirm: "このレビューを削除してもよろしいですか？" }, class: "btn btn-danger" %>
             </td>
           </tr>
         <% end %>

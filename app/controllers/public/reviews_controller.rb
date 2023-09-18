@@ -38,6 +38,14 @@ def index
       render :edit
     end
   end
+   def destroy
+    @review = Review.find(params[:id])
+    @customer=Customer.find(@review.customer_id)
+    if @review.destroy
+      flash[:success] = "レビューが削除されました"
+    end
+    redirect_to customer_path(@customer)
+   end
 
   private
 
