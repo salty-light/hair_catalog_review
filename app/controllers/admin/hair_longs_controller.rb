@@ -6,7 +6,7 @@ def index
 end
   
   def create
-     @hair_long = HairLong.new(hair_long_params)
+    @hair_long = HairLong.new(hair_long_params)
     @hair_long.save
     redirect_to admin_hair_longs_path
   end
@@ -18,9 +18,17 @@ end
   def update
      @hair_long = HairLong.find(params[:id])
     @hair_long.update(hair_long_params)
-    redirect_to admin_hair_long_path
+    redirect_to admin_hair_longs_path
   end
   
+  def destroy
+     @hair_long = HairLong.find(params[:id])
+      if @hair_long.destroy
+      flash[:success] = "レビューが削除されました"
+      end
+    redirect_to admin_hair_longs_path
+  end 
+   
   private
   
   def hair_long_params

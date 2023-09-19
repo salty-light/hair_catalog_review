@@ -1,98 +1,121 @@
 <%#= form_with model: @hair_catalog, url: hair_catalogs_path do |f| %>
-  <body>
-  <main>
-   <div class="container px-5 px-sm-3">
-   <div class="row">
-   <div class="col-md-3"> </br>
-  <%#= f.hidden_field :hair_catalog_id, value: @hair_catalog.id %>
-  <%= image_tag @hair_catalog.image, size: "300x300" %></div>
-  <div class="col-md-8 offset-md-1">
-   </br>
-    </br>
-     <h1><%= @hair_catalog.name %> </h1>
-      <h5> <%= @hair_catalog.explamatory_text %></h5>
-      <%# end %>
-     </div>
-   </div>
-   <h3>レビュー新規登録</h3>
-   <div class="row">
-     <div class="col-sm-2" ></div>
-       <div class="col-sm-8" >
-         <%= form_with model: @review, url: hair_catalog_reviews_path(@hair_catalog) , method: :post do |f| %>
-         <table>
-          <tbody>
-           <tr>
-            <td>髪型画像</td>  <td><%= f.file_field :image, accept: "image/*" %></td></tr>
-            <tr>
-              <td>レビュー</td>
-              <td><%= f.text_area :body, placeholder: "感想をいれてください" %></td>
-          <td><% if @review.id.nil? %>
-          <div class="form-group" id="score">
-      <%= f.label :score %>
-      <%= f.hidden_field :score, id: :review_score, class: 'form-control' %>
-      <div id="post_raty"></div>
-    </div>
-    <script>
-      $(document).on('turbolinks:load', function() {
-        let elem = document.querySelector('#post_raty');
-        if (elem == null) return;
 
-        elem.innerHTML = ""
-        let opt = {
-          starOn: "<%= asset_path('star-on.png') %>",
-          starOff: "<%= asset_path('star-off.png') %>",
-          starHalf: "<%= asset_path('star-half.png') %>",
-          scoreName: 'review[score]',
-        };
-        raty(elem, opt);
-      });
-    </script>
-  <% else %>
-    <div class="form-group">
-      <%= render "static_rate", review: review %>
-    </div>
-  <% end %>
-
-  </td>
-              </tr>
-              <td><%= f.submit '新規登録', class:"btn btn-success" %></td>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-   </div>
 <div class="container px-5 px-sm-3">
+  <div class="row mt-4">
+    <div class="col-md-3">
+      <%#= f.hidden_field :hair_catalog_id, value: @hair_catalog.id %>
+      <div>
+        <%= image_tag @hair_catalog.image, size: "300x300" %>
+      </div>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <div>
+        <h1><%= @hair_catalog.name %> </h1>
+        <h5 class="mt-3"><%= @hair_catalog.explamatory_text %></h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-sm-8 offset-sm-2" >
+      
+      <h3>レビュー新規登録</h3>
+      <%= form_with model: @review, url: hair_catalog_reviews_path(@hair_catalog) , method: :post do |f| %>
+        <div class="form-group row" id="score">
+          <%= f.label :score, class: "col-sm-6" %>
+          <div class="col-sm-6">
+            <div id="post_raty"></div>
+            <%#= f.hidden_field :score, id: :review_score, class: 'form-control' %>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <%= f.label :image, "髪型画像", class: "col-sm-6" %>
+          <div class="col-sm-6">
+            <%= f.file_field :image, accept: "image/*" %>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <%= f.label :body, "レビュー", class: "col-sm-6" %>
+          <div class="col-sm-6">
+            <%= f.text_area :body, placeholder: "感想をいれてください", class: "form-control" %>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <%= f.submit '新規登録', class:"btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-12">
+      <% @hair_catalog.reviews.each do |review|%>
+        <div class="row">
+          <div class="col-sm-3">
+            kokonishashin
+          </div>
+          <div class="col-sm-9">
+            kokonisonota
+            <div class="mt-2"></div>
+            <div class="mt-2"></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    let elem = document.querySelector('#post_raty');
+    if (elem == null) return;
+    elem.innerHTML = ""
+    let opt = {
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      starHalf: "<%= asset_path('star-half.png') %>",
+      scoreName: 'review[score]',
+    };
+    raty(elem, opt);
+  });
+</script> 
+
    <div class="row">
    <div class="col-md-6 mx-auto text-center">
     <table>
      <tbody>
        <% @hair_catalog.reviews.each do |review|%>
-        <% if review.image.attached? %>
-        <tr><td>髪型画像</td>
-        <td><%= image_tag review.image, size: "200x200" %></td></tr>
+       <% if review.image.attached? %>
+       <tr>
+        <td><%= image_tag review.image, size: "200x200" %></td>
          <% else %>
-        <% end %>
-       <h5>  <%= review.customer.nick_name %> </h5>
-       <h6>  <%= review.body %></h6>
+         <% end %>
+        
+        <td> <h6><%= review.body %></h6></td>
+       </tr>
+       <tr>
+        <td><h5> <%= review.customer.nick_name %> </h5></td>
+       </tr>
        <div id="score_<%= review.id %>"></div>
-<script>
-$(document).on('turbolinks:load', function() {
-  let elem = document.querySelector('#score_<%= review.id %>');
-  if (elem == null) return;
+       <script>
+       $(document).on('turbolinks:load', function() {
+       let elem = document.querySelector('#score_<%= review.id %>');
+       if (elem == null) return;
   
-  elem.innerHTML = "";
-  let opt = {  
-    starOn: "<%= asset_path('star-on.png') %>",
-    starOff: "<%= asset_path('star-off.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-    score: "<%= review.score %>",
-    readOnly: true,
-  };
-  raty(elem, opt);
-});
-</script>
+      elem.innerHTML = "";
+      let opt = {  
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      starHalf: "<%= asset_path('star-half.png') %>",
+     score: "<%= review.score %>",
+     readOnly: true,
+     };
+     raty(elem, opt);
+     });
+     </script>
      <%end%>
-   </tbody>
+     </tbody>
     </table>
-  </body>
-  </main>

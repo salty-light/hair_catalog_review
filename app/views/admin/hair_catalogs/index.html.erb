@@ -7,14 +7,17 @@
         <table class="table">
           <thead>
             <tr>
-              <th class='table-active'>髪の長さ</th>
+            <th class='table-active'>ヘアカタログID</th>
+            <td>カタログ名</td>
+            <td>髪の長さ</td>
             </tr>
           </thead>
             <% @hair_catalogs.each do |hair_catalog| %>
               <tr>
                 <td><%= hair_catalog.id %></td>
-                <td><%= link_to hair_catalog.name, admin_hair_catalogs_path(hair_catalog.id), class:"text-dark"%></td>
-                <td><%= hair_catalog.hair_long.name %></td>
+                <td><%= link_to hair_catalog.name, admin_hair_catalog_path(hair_catalog.id), class:"text-dark"%></td>
+                <td><%= hair_catalog.hair_long.name if hair_catalog.hair_long.present? %></td>
+             <td><%= link_to "削除", admin_hair_catalog_path(hair_catalog.id ), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %> </td>
               </tr>
             <% end %>
         </table>

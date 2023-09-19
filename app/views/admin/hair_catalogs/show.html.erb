@@ -2,11 +2,17 @@
   <%= flash[:success] %>
 </div>
 
-<div class="container">
-  <h2>髪型の詳細</h2>
-    <div class="row">
-      <div class="col-sm" >
-    　　<%= image_tag @.image, size: "300x200" %>
-    
-</div>
-<div class="text-center"><%= link_to "編集する", edit_admin_catalogs_path(@hair_catalog), class:"btn btn-success" %></div>
+<div class="containerpx-5 px-sm-3">
+   <div class="row">
+   <div class="col-md-6"> 
+    <table>
+      <h2>髪型の詳細</h2>
+      　    <tbody>
+             <tr>
+     <td><%= image_tag @hair_catalog.image, size: "300x200" %></td> 
+         
+        <td> <%= @hair_catalog.explamatory_text %></td> </tr>
+     <tr> <td><h5><%= @hair_catalog.name %></h5></td></tr> 
+          </tbody> </table>
+<div class="text-center"><%= link_to "編集する", edit_admin_hair_catalog_path(@hair_catalog), class:"btn btn-success" %></div>
+</div></div></div>

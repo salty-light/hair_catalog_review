@@ -34,6 +34,13 @@ class Admin::HairCatalogsController < ApplicationController
       render :edit
     end
   end
+ def destroy
+   @hair_catalog = HairCatalog.find(params[:id]) 
+    if @hair_catalog.destroy
+      flash[:success] = "レビューが削除されました"
+    end
+    redirect_to admin_hair_catalogs_path
+ end 
 
   private
 

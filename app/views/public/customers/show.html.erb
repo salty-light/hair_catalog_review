@@ -1,6 +1,6 @@
-<div class='container pt-5'>
+<div class='container px-5 pt-5'>
   <div class='row'>
-    <div class='col-md-6 mx-auto'>
+    <div class='col-md-8 mx-auto'>
       <h2>マイページ</h2>
       <h5><strong>登録情報　　</strong><%= link_to "編集する", customer_edit_path, class:"btn btn-success" %></h5>
       <table class='table table-bordered mt-3'>
@@ -45,28 +45,27 @@
             <td>
               <%= review.body %>
             </td>
-            <td>
-               <div id="score_<%= review.id %>"></div>
-<script>
-$(document).on('turbolinks:load', function() {
-  let elem = document.querySelector('#score_<%= review.id %>');
-  if (elem == null) return;
-  
-  elem.innerHTML = "";
-  let opt = {  
-    starOn: "<%= asset_path('star-on.png') %>",
-    starOff: "<%= asset_path('star-off.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-    score: "<%= review.score %>",
-    readOnly: true,
-  };
-  raty(elem, opt);
-});</script>
-            </td>
-            <td>
-              <%= link_to "削除",  hair_catalog_review_path(review.hair_catalog_id, review.id), method: :delete, data: { confirm: "このレビューを削除してもよろしいですか？" }, class: "btn btn-danger" %>
-            </td>
-          </tr>
+        <td>
+         <div id="score_<%= review.id %>"></div>
+          <script>
+           $(document).on('turbolinks:load', function() {
+           let elem = document.querySelector('#score_<%= review.id %>');
+           if (elem == null) return;
+            elem.innerHTML = "";
+            let opt = {  
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            score: "<%= review.score %>",
+            readOnly: true,
+            };
+            raty(elem, opt);
+            });</script>
+          </td>
+          <td>
+            <%= link_to "削除",  hair_catalog_review_path(review.hair_catalog_id, review.id), method: :delete, data: { confirm: "このレビューを削除してもよろしいですか？" }, class: "btn btn-danger" %>
+          </td>
+         </tr>
         <% end %>
       </table>
     </div>

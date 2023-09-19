@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
    }
       scope module: :public do
-      get 'top' => 'homes#top'
+      root to: 'homes#top'
       get "/about" => "homes#about", as: "about"
-     
+
 
 
       get "customers/:id" => "customers#show", as: :customer
@@ -31,9 +31,9 @@ Rails.application.routes.draw do
       root to: 'homes#top'
 
       resources :customers, only: [:index, :show, :edit, :update]
-      resources :hair_longs, only: [:index, :edit, :create, :update]
-      resources :hair_catalogs, only: [:index, :new, :show, :edit, :create, :update] 
-       
+      resources :hair_longs, only: [:index, :edit, :create, :update, :destroy]
+      resources :hair_catalogs, only: [:index, :new, :show, :edit, :create, :update, :destroy]
+
 
     end
 
