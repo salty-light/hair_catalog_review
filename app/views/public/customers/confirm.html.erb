@@ -4,6 +4,7 @@
       <strong>退会すると、会員登録情報や<br>
       退会する場合は、「退会する」をクリックしてください。<br></strong>
     <br>
-    <p><%= link_to "退会しない", current_customer_path, class:"btn btn-primary" %><%= link_to "退会する", current_customer_withdraw_path, method: :patch, :class => "btn btn-danger", data: { confirm: "本当に削除しますか？" } %></p>
+    <p><%= link_to "退会しない",current_customer, class:"btn btn-primary" %>
+    <%= link_to "退会する", customers_withdraw_path(@current_customer), method: :patch, :class => "btn btn-danger", data: { confirm: "本当に削除しますか？" } %></p>
   </div>
 </div>

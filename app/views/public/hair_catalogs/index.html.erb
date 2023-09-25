@@ -4,7 +4,7 @@
 <h1>ヘアカタログ一覧</h1></br>
  <%= link_to '新しい順', hair_catalogs_path(latest: "true") %>
  <%= link_to '古い順', hair_catalogs_path(old: "true") %>
- <%= link_to '評価の高い順',hair_catalogs_path(star_count: "true") %>
+ <%#= link_to '評価の高い順',hair_catalogs_path(star_count: "true") %>
 <div class "container " >
   <div class="row m-2">
 
@@ -12,8 +12,7 @@
     <div class="col-lg-3" >
     <div class="">
      <div> <%= link_to image_tag(hair_catalog.image, width: '200', height: '200'), hair_catalog_path(hair_catalog) %>  </div>
-      <div><h5> <%= hair_catalog.name %> </h5></div>
-
+     <div><h5> <%= hair_catalog.name %> </h5></div>
     </div>
     </div>
     <% end %>

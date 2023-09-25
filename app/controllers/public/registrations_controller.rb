@@ -6,7 +6,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
 
   def after_sign_up_path_for(_resource)
-    top_path
+    root_path
   end
   
   

@@ -7,19 +7,26 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
    }
-      scope module: :public do
+    scope module: :public do
       root to: 'homes#top'
       get "/about" => "homes#about", as: "about"
 
-
-
+      # resources :customers do
+      #   collection do
+      #     get :confirm
+      #     patch :withdraw
+      #   end
+      # end
+      get "customers/confirm" => "customers#confirm"
+      patch "customers/withdraw" => "customers#withdraw"
       get "customers/:id" => "customers#show", as: :customer
       patch "customers/:id" => "customers#update", as: :customer_update
       get "customers/:id/edit" => "customers#edit", as: :customer_edit
-      get "customers/confirm" => "customers#confirm"
-      patch "customers/withdraw" => "customers#withdraw"
+
       resources :hair_catalogs, only: [:index, :show] do
-         resources :reviews, only: [:index, :edit, :create, :update, :destroy]
+       resources :reviews, only: [:index, :edit, :create, :update, :destroy] do
+           resource :favorites, only: [:create, :destroy]
+       end
       end
       get "reviews/:id"=> "reviews#update"
       delete "hair_catalogs/:hair_id/reviews/:id"=>  "reviews#destroy"

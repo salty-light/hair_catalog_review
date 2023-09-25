@@ -4,6 +4,7 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = current_customer
     @reviews = Review.where(customer_id: @customer.id).order(created_at: :desc)
+    #byebug
   end
 
   def edit
@@ -23,7 +24,7 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     customer = current_customer
-    customer.update(is_deleted: true)
+    customer.destroy
     reset_session
     redirect_to root_path
   end
