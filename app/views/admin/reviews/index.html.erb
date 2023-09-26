@@ -1,0 +1,14 @@
+<div class="container px-5 px-sm-3">
+   <div class="row mt-4">
+  <div class="col-12">
+    <% @reviews.each do |review| %>
+      <div class="row mt-4">
+        <div class="col-sm-3">
+          <%= image_tag review.image, size: "200x200" %>
+        </div>
+        <div class="mt-2"><%= review.body %></div>
+       <%= link_to "削除",admin_review_path( review.id), method: :delete, data: { confirm: "このレビューを削除してもよろしいですか？" }, class: "btn btn-danger" %>
+      </div>
+    <% end %>
+  </div>
+</div>

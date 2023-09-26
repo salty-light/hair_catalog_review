@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       get "customers/:id" => "customers#show", as: :customer
       patch "customers/:id" => "customers#update", as: :customer_update
       get "customers/:id/edit" => "customers#edit", as: :customer_edit
-
+      get "search" => "searches#search"
       resources :hair_catalogs, only: [:index, :show] do
        resources :reviews, only: [:index, :edit, :create, :update, :destroy] do
            resource :favorites, only: [:create, :destroy]
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       root to: 'homes#top'
-
+      resources :reviews, only: [ :destroy,:index]
       resources :customers, only: [:index, :show, :edit, :update]
       resources :hair_longs, only: [:index, :edit, :create, :update, :destroy]
       resources :hair_catalogs, only: [:index, :new, :show, :edit, :create, :update, :destroy]
