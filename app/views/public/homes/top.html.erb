@@ -5,7 +5,9 @@
   <div class="text-center">
 
 　　<h3 class="home-text">♪ようこそ♪こちらはヘアカタログのレビューサイトです！</h3>
-
+<% if customer_signed_in? %>
+ログインしました。
+<% else %>
 初めての方は是非会員登録からお願いします。
 
 <div class="btn-wrapper col-2 mx-auto">
@@ -14,3 +16,4 @@
 　　</div>
       <%= link_to "Sign up", new_customer_registration_path(@current_customer), class:"btn btn-success  btn-block sign_up"  %>
 </div>
+<% end %>

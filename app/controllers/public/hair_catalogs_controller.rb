@@ -1,4 +1,5 @@
 class Public::HairCatalogsController < ApplicationController
+before_action :authenticate_customer!
  def index
      if params[:latest]
       @hair_catalogs = HairCatalog.latest

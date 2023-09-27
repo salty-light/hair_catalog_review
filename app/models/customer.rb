@@ -22,4 +22,15 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :image
+  
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.last_name = "xxxxxxxxx"
+      customer.first_name = "xxxxxxxxx"
+      customer.last_name_kana = "xxxxxxxxx"
+      customer.first_name_kana = "xxxxxxxxx"
+      customer.nick_name = "xxxxxxxxx"
+    end
+  end
 end
