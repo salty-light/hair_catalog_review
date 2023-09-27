@@ -17,6 +17,11 @@ before_action :authenticate_customer!
     @hair_catalog = HairCatalog.find(params[:id])
    @new_hair_catalog = HairCatalog.new
    @review = Review.new
+   if params[:start_date] && params[:end_date]
+    @reviews = @hair_catalog.reviews.where(created_at:  params[:start_date].. params[:end_date] )
+   else 
+     @reviews = @hair_catalog.reviews
+   end
   end
 private
 

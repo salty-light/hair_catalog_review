@@ -49,10 +49,16 @@
       <% end %>
     </div>
   </div>
-
+<%= form_with url: hair_catalog_path(@hair_catalog),method: :get do |f| %>
+<%= f.label :start_date, '開始日' %>
+<%= f.datetime_field :start_date %>~
+<%= f.label :end_date, '終了日' %>
+<%= f.datetime_field :end_date %>
+ <%= f.submit '検索', class:"btn btn-success" %>
+<% end %>
   <div class="row mt-4">
     <div class="col-12">
-      <% @hair_catalog.reviews.each do |review|%>
+      <% @reviews.each do |review|%>
         <div class="row  mt-4">
           <div class="col-sm-3">
             <%= image_tag review.image, size: "200x200" %>
