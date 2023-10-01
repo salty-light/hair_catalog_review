@@ -7,4 +7,5 @@ has_many :favorites, dependent: :destroy
    favorites.exists?(customer_id: customer.id)
  end
 has_one_attached :image
+validates :image, presence: true
 end

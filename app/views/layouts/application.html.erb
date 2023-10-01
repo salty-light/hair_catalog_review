@@ -16,6 +16,21 @@
       <%= render 'layouts/header' %>
        <%= render 'layouts/search' %>
     </header>
+
+    <div class="container">
+      <% if flash[:success] %>
+        <div class="alert alert-primary">
+          <%= flash[:success] %>
+        </div>
+      <% end %>
+
+      <% if flash[:danger] %>
+        <div class="alert alert-danger">
+          <%=flash[:danger] %>
+        </div>
+      <% end %>
+    </div>
+
     <main>
 
       <%= yield %>
