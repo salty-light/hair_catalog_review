@@ -4,7 +4,7 @@
     <% @reviews.each do |review| %>
       <div class="row mt-4">
          <%if review.image.attached? %>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <%= image_tag review.image, size: "200x200" %>
         </div>
          <% end %>
