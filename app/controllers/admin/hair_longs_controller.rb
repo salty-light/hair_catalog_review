@@ -24,7 +24,7 @@ end
   def destroy
      @hair_long = HairLong.find(params[:id])
       if @hair_long.destroy
-      flash[:success] = "レビューが削除されました"
+      flash[:success] = "ヘアロングが削除されました"
       end
     redirect_to admin_hair_longs_path
   end 

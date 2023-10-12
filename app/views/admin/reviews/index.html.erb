@@ -7,9 +7,11 @@
         <div class="col-sm-3">
           <%= image_tag review.image, size: "200x200" %>
         </div>
-         <% end %> 
-        <div class="mt-2"><%= review.body %></div>
-       <%= link_to "削除",admin_review_path( review.id), method: :delete, data: { confirm: "このレビューを削除してもよろしいですか？" }, class: "btn btn-danger" %>
+         <% end %>
+         <div class="cpl-sm-8">
+           <div class="mt-2"><%= review.body %></div>
+           <%= link_to "削除",admin_review_path( review.id), method: :delete, data: { confirm: "このレビューを削除してもよろしいですか？" }, class: "btn btn-danger" %>
+         </div>
       </div>
     <% end %>
   </div>
