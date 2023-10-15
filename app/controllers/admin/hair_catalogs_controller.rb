@@ -1,4 +1,5 @@
 class Admin::HairCatalogsController < ApplicationController
+  before_action :authenticate_admin!
  def index
     @hair_catalogs = HairCatalog.all
  end
@@ -35,12 +36,12 @@ class Admin::HairCatalogsController < ApplicationController
     end
   end
  def destroy
-   @hair_catalog = HairCatalog.find(params[:id]) 
+   @hair_catalog = HairCatalog.find(params[:id])
     if @hair_catalog.destroy
       flash[:success] = "カタログが削除されました"
     end
     redirect_to admin_hair_catalogs_path
- end 
+ end
 
   private
 

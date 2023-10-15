@@ -1,10 +1,12 @@
 class Public::FavoritesController < ApplicationController
-def create
+  before_action :authenticate_customer!
+
+  def create
     @review = Review.find(params[:review_id])
     favorite = current_customer.favorites.new(review_id: @review.id)
     favorite.save
 
-end
+  end
 
   def destroy
     @review = Review.find(params[:review_id])

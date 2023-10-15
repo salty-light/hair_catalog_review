@@ -13,8 +13,8 @@
          <td><%= @customer.id %></td>
        </tr>
     <tr>
-      <th class="table-active"><%= f.label "氏名" %></th>
-      <td><%= f.text_field :last_name %><%= f.text_field :first_name %></td>
+      <th class="table-active">氏名</th>
+      <td><%= @customer.last_name %><%= @customer.first_name %></td>
     </tr>
     <tr>
       <td class='table-active'>カナ</td>
@@ -24,8 +24,8 @@
       <td><%= @customer.nick_name %></td>
     </tr>
     <tr>
-       <th class="table-active"><%= f.label "メールアドレス" %></th>
-       <td><%= f.text_field :email %></td>
+       <th class="table-active">メールアドレス</th>
+       <td><%= @customer.email %></td>
       </tr>
       <tr>
         <th class="table-active"><%= f.label "会員ステータス" %></th>

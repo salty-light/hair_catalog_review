@@ -1,6 +1,7 @@
 class Review < ApplicationRecord
 belongs_to :hair_catalog
 belongs_to :customer
+has_many :comments, dependent: :destroy 
 #rebyunogazou
 has_many :favorites, dependent: :destroy
  def favorited_by?(customer)

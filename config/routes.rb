@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       resources :hair_catalogs, only: [:index, :show] do
        resources :reviews, only: [:index, :edit, :create, :update, :destroy] do
            resource :favorites, only: [:create, :destroy]
+           resources :comments, only: [:create] 
        end
       end
       get "reviews/:id"=> "reviews#update"

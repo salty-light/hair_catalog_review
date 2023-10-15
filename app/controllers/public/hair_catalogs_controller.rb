@@ -13,8 +13,7 @@ before_action :authenticate_customer!
  end
 
   def show
-
-    @hair_catalog = HairCatalog.find(params[:id])
+   @hair_catalog = HairCatalog.find(params[:id])
    @new_hair_catalog = HairCatalog.new
    @review = Review.new
    if params[:start_date] && params[:end_date]

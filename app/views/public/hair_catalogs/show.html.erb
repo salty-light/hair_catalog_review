@@ -82,7 +82,31 @@
               });
              </script>
             <div class="mt-2"><%= review.body %></div>
+             <% if current_customer != review.customer %>
+             
             <div id="favorite_button_<%= review.id %>" class="mt-2"><%= render "public/favorites/btn", review: review %></div>
+            <% end %>
+            <%= form_with(url: hair_catalog_review_comments_path(@hair_catalog, review), method: :post) do |f| %>
+             <div class="field">
+               <%= f.label :コメントフォーム %>
+               <%= f.text_area :comment_content %>
+             </div>
+               <%= f.hidden_field :review_id, value: @review.id %>
+             <div class="actions">
+               <%= f.submit 'コメントする' %>
+             </div>
+           <% end %>
+         <div class="col-sm-8">
+           <h5>コメント一覧</h5>
+         <ul>
+          <% review.comments.each do |comment| %>
+          <li>
+           <%= comment.comment_content %>
+          </li>
+          <div class="mt-2" style="font-size: 24px; font-weight: bolder;"> <%= comment.customer.nick_name %></div>
+          <% end %>
+        </ul>
+        </div>
           </div>
         </div>
       <% end %>

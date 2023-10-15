@@ -2,7 +2,10 @@
   <div class='row'>
     <div class='col-md-8 mx-auto'>
       <h2>マイページ</h2>
-      <h5><strong>登録情報　　</strong><%= link_to "編集する", customer_edit_path, class:"btn btn-success" %></h5>
+      <h5><strong>登録情報　　</strong>
+      <% if @customer.email != "guest@example.com" %>
+      <%= link_to "編集する", customer_edit_path, class:"btn btn-success" %>
+      <% end %></h5>
       <table class='table table-bordered mt-3'>
         <tr>
           <td class="table-active">氏名</td>

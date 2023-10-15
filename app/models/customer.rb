@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   has_many :favorites, dependent: :destroy
+  has_many :comments 
   def self.looks(search, word)
     if search == "perfect_match"
       @customer = Customer.where("nick_name LIKE?", "#{word}")

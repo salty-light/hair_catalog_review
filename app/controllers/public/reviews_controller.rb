@@ -1,5 +1,5 @@
 class Public::ReviewsController < ApplicationController
-
+  before_action :authenticate_customer!
   def index
     # @reviews = Review.page(params[:page])
     redirect_to hair_catalog_path(params[:hair_catalog_id])
@@ -37,6 +37,8 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
+    @comments = @review.comments
+    @comment = current_customer.comments.new
   end
 
   def edit
